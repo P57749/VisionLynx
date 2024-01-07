@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "ebefad5033201ff5430e",
+    "revision": "0aedafaf0012bca0e62f",
     "url": "/mecvision/css/app.851ae1fd.css"
   },
   {
-    "revision": "ebefad5033201ff5430e",
-    "url": "/mecvision/js/app.6564c9d5.js"
+    "revision": "0aedafaf0012bca0e62f",
+    "url": "/mecvision/js/app.1999be7d.js"
   },
   {
     "revision": "a065a704bfc2b4cb2e1e",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/mecvision/js/chunk-vendors.3904fad3.js"
   },
   {
-    "revision": "6bd6e2515d575a83dea543a4c6f07644",
+    "revision": "14016d1b8e9d6b6664d7f0e039284d8a",
     "url": "/mecvision/index.html"
   },
   {
@@ -66,5 +66,9 @@ self.__precacheManifest = [
   {
     "revision": "1f5362cb0f8d4eab1f10205ae869a453",
     "url": "/mecvision/opencv.js"
+  },
+  {
+    "revision": "081e683e25e09768efc0d0186c2cbbcd",
+    "url": "/mecvision/img/inconesp.png"
   }
 ];
