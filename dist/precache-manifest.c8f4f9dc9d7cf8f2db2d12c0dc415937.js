@@ -28,8 +28,16 @@ self.__precacheManifest = [
     "url": "/mecvision/img/bot.png"
   },
   {
+    "revision": "081e683e25e09768efc0d0186c2cbbcd",
+    "url": "/mecvision/img/inconesp.png"
+  },
+  {
     "revision": "391e4fb8f4a4ec32c32ca20a566219a9",
     "url": "/mecvision/img/legend.png"
+  },
+  {
+    "revision": "54c697147c04fbc21bb150d77bd08da0",
+    "url": "/mecvision/img/type-microscope-thumb.jpg"
   },
   {
     "revision": "2cb4594fe5207412a8d15d751cf0e578",
@@ -38,10 +46,6 @@ self.__precacheManifest = [
   {
     "revision": "8e73b36270e282252a67944140bd53b8",
     "url": "/mecvision/img/Screenshot-Descriptions.png"
-  },
-  {
-    "revision": "54c697147c04fbc21bb150d77bd08da0",
-    "url": "/mecvision/img/type-microscope-thumb.jpg"
   },
   {
     "revision": "20f7377552ea1611d841d097a87993b8",
@@ -66,9 +70,5 @@ self.__precacheManifest = [
   {
     "revision": "1f5362cb0f8d4eab1f10205ae869a453",
     "url": "/mecvision/opencv.js"
-  },
-  {
-    "revision": "081e683e25e09768efc0d0186c2cbbcd",
-    "url": "/mecvision/img/inconesp.png"
   }
 ];
