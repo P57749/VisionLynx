@@ -8,15 +8,15 @@
     <v-layout>
       <v-flex xs12 md6 offset-md3>
         <v-container grid-list-xl class="pt-0">
-          <h2 class="subheading text-xs-center pb-2">{{ $t('Select the ovitrap image type') }}</h2>
+          <h2 class="subheading text-xs-center pb-2">{{ $t('Selecciona el tipo de imagen de ovitrap.') }}</h2>
 
           <v-item-group v-model="imageType" mandatory>
             <v-layout row wrap justify-center>
 
-              <v-flex sm6 md3>
+              <v-flex xs12 md4>
                 <v-item>
                   <v-card slot-scope="{ active, toggle }" :style="active ? 'border: 2px solid var(--v-primary-base)' : ''"
-                    :class="active ? 'elevation-5' : ''" @click="toggle(), resetCroppa(), selectCamera('papel')">
+                    :class="active ? 'elevation-5' : ''" @click="toggle(), resetCroppa()">
                     <v-img src="/img/type-paper-thumb.jpg" aspect-ratio="2.00"></v-img>
                     <v-card-title primary-title>
                       <div>
@@ -28,10 +28,10 @@
                 </v-item>
               </v-flex>
 
-              <v-flex sm6 md3>
+              <v-flex xs12 md4>
                 <v-item>
                   <v-card slot-scope="{ active, toggle }" :style="active ? 'border: 2px solid var(--v-primary-base)' : ''"
-                    :class="active ? 'elevation-5' : ''" @click="toggle(), resetCroppa(), selectCamera('trampa')">
+                    :class="active ? 'elevation-5' : ''" @click="toggle(), resetCroppa()">
                     <v-img src="/img/type-magnified-thumb.jpg" aspect-ratio="2.00"></v-img>
                     <v-card-title primary-title>
                       <div>
@@ -43,12 +43,10 @@
                 </v-item>
               </v-flex>
 
-
-
-              <v-flex sm6 md3>
+              <v-flex xs12 md4>
                 <v-item>
                   <v-card slot-scope="{ active, toggle }" :style="active ? 'border: 2px solid var(--v-primary-base)' : ''"
-                    :class="active ? 'elevation-5' : ''" @click="toggle(), resetCroppa(), selectCamera('micro')">
+                    :class="active ? 'elevation-5' : ''" @click="toggle(), resetCroppa()">
                     <v-img src="/img/type-microscope-thumb.jpg" aspect-ratio="2.00"></v-img>
                     <v-card-title primary-title>
                       <div>
@@ -59,23 +57,6 @@
                   </v-card>
                 </v-item>
               </v-flex>
-
-              <v-flex sm6 md3>
-                <v-item>
-                  <v-card slot-scope="{ active, toggle }" :style="active ? 'border: 2px solid var(--v-primary-base)' : ''"
-                    :class="active ? 'elevation-5' : ''" @click="toggle(), resetCroppa(), selectCamera('camera'), openVideoModal()">
-                    <v-img src="/img/micro.jpg" aspect-ratio="2.00"></v-img>
-                    <!-- <video ref="video" autoplay></video> -->
-                    <v-card-title primary-title>
-                      <div>
-                        <h3 class="headline mb-0">{{ $t('Camera View') }}</h3>
-                        <div>{{ $t('Camera-Description') }}</div>
-                      </div>
-                    </v-card-title>
-                  </v-card>
-                </v-item>
-
-              </v-flex>
             </v-layout>
           </v-item-group>
 
@@ -85,14 +66,22 @@
     </v-layout>
 
     <!-- Using Vue Croppa for image handling and manipulation.
-The one thing to note is the image selection changes the styling of the crop box.
-The image itself is then passed on via the 'accept' method below. -->
-    <v-layout id="croppaBox" v-if="!cameraSelected" :key="croppaKey" :style="this.croppaDimensions">
+  The one thing to note is the image selection changes the styling of the crop box.
+  The image itself is then passed on via the 'accept' method below. -->
+    <v-layout id="croppaBox" :key="croppaKey" :style="this.croppaDimensions">
+
+      <video id="liveVideo" autoplay></video>
+
       <croppa v-model="croppa" auto-sizing :zoom-speed="5" placeholder="" :show-loading="true" :placeholder-font-size="20"
         :loading-size="100" :show-remove-button="false" :prevent-white-space="false" :initial-image="initialImage"
         @initial-image-loaded="showBottomOptions = true" @new-image="showBottomOptions = true"
         @image-remove="showBottomOptions = false">
-
+        
+        
+        <!-- <div id="videoContainer">
+          <video id="liveVideo" autoplay></video>
+        </div> -->
+        <video id="liveVideo" autoplay></video>
         <!-- 'Select image' button serves the same function as drag/drop image into boundary area, exept allows for file chooser explicitely. -->
         <!-- Icons are loaded with Google Material icons. -->
         <v-btn id="croppaButton" v-show="!croppa.imageSet" @click="croppa.chooseFile()" flat large depressed absolute>
@@ -100,22 +89,25 @@ The image itself is then passed on via the 'accept' method below. -->
           <v-icon large right>photo</v-icon>
         </v-btn>
 
-          
-
         <!-- Allowed to load a demo image as a way to test and demonstrate app functionality. -->
         <v-btn v-show="!croppa.imageSet" @click="loadDemoImage()" absolute right style="top: 25px">
           {{ $t('Demo Image') }}
           <v-icon right>grain</v-icon>
         </v-btn>
 
+        <v-btn v-show="!croppa.imageSet" @click="startLiveVideo()" absolute right style="top: 100px">
+          {{ $t('Camara') }}
+          <v-icon right>camera</v-icon>
+        </v-btn>
+
+        <v-btn v-show="!croppa.imageSet && liveVideoActive" @click="takeSnapshot()" absolute right style="top: 175px">
+          {{ $t('Take Snapshot') }}
+          <v-icon right>camera</v-icon>
+        </v-btn>
 
 
       </croppa>
     </v-layout>
-
-    <b-modal id="video-modal" ref="videoModalRef" v-if="cameraSelected" @click="takePicture()">
-      <video v-if="$refs.video" ref="video" autoplay></video>
-    </b-modal>
 
     <v-bottom-nav app fixed :value="this.showBottomOptions" height='70'>
 
@@ -129,34 +121,28 @@ The image itself is then passed on via the 'accept' method below. -->
         <v-icon>cancel</v-icon>
       </v-btn>
 
+      <!-- <v-btn v-show="!croppa.imageSet && liveVideoActive" @click="takeSnapshot()">
+        {{ $t('Take Snapshot') }}
+        <v-icon right>camera</v-icon>
+      </v-btn> -->
+
       <v-btn flat color="secondary" @click="accept()">
         <span>{{ $t('Analyze') }}</span>
         <v-icon>check_circle</v-icon>
-      </v-btn>
-
-      <v-btn flat color="secondary" @click="takePicture">
-        <span>{{ $t('Tomar foto') }}</span>
-        <v-icon>camera</v-icon>
       </v-btn>
 
     </v-bottom-nav>
 
   </v-container>
 </template>
-
+  
 <script>
 import { eventBus } from '../main.js'
 import AppTop from './Top.vue'
-import { BModal } from 'bootstrap-vue'
-import Vue from 'vue'
-// import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-
-Vue.component('b-modal', BModal)
 
 export default {
   components: {
-    AppTop,
-    BModal
+    AppTop
   },
   data() {
     return {
@@ -170,16 +156,7 @@ export default {
       analysisStarted: false,
       showBottomOptions: false,
       imageType: 0,
-      showModal: false,
-      selectedItem: null,
-      cameraSelected: false,
-    }
-  },
-  mounted() {
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
-        this.$refs.video.srcObject = stream;
-      });
+      liveVideoActive: false,
     }
   },
   computed: {
@@ -196,21 +173,66 @@ export default {
       setTimeout(() => (this.loadingDialog = false), 500)
     }
   },
+  //   mounted() {
+  //  this.startLiveVideo();
+  // },
+
 
   methods: {
     // testOpenCV () { // For debugging purposes, ensure that OpenCV is loaded and registered correctly
     //   let info = cv.getBuildInformation()
     //   console.log('main created', info, cv)
     // },
-    
-    selectCamera(item) {
-      this.selectedItem = item;
-      if (item === 'camera') {
-        this.cameraSelected = true;
-      } else {
-        this.cameraSelected = false;
-      }
+    //       captureCameraImage() {
+    //       navigator.mediaDevices.getUserMedia({ video: true })
+    //      .then((stream) => {
+    //        const video = document.createElement('video');
+    //        video.srcObject = stream;
+    //        video.onloadedmetadata = () => {
+    //          video.play();
+    //          const canvas = document.createElement('canvas');
+    //          canvas.width = video.videoWidth;
+    //          canvas.height = video.videoHeight;
+    //          const ctx = canvas.getContext('2d');
+    //          ctx.drawImage(video, 0, 0);
+    //          const imgData = canvas.toDataURL('image/png');
+    //          this.initialImage = imgData;
+    //          this.croppa.refresh();
+    //        };
+    //      })
+    //      .catch((err) => {
+    //        console.error("Error accessing camera", err);
+    //      });
+    //  },
+
+    startLiveVideo() {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then((stream) => {
+          const video = document.querySelector('#liveVideo');
+          video.srcObject = stream;
+          video.onloadedmetadata = () => {
+            video.play();
+            // this.initialImage = vide.play();
+            this.liveVideoActive = true;
+          };
+        })
+        .catch((err) => {
+          console.error("Error accessing camera", err);
+        });
     },
+    takeSnapshot() {
+      const video = document.querySelector('#liveVideo');
+      const canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0);
+      const imgData = canvas.toDataURL('image/png');
+      this.initialImage = imgData;
+      this.croppa.refresh();
+      this.liveVideoActive = false;
+    },
+
     resetCroppa() {
       this.initialImage = null
       this.croppaKey += 1
@@ -229,25 +251,6 @@ export default {
       this.$vuetify.goTo('#croppaBox', {
       })
     },
-    openVideoModal() {
-      this.showModal = true;
-      let image = new Image()
-      this.initialImage = image
-      this.croppa.refresh()
-      this.$vuetify.goTo('#croppaBox', {
-      })
-    },
-    takePicture() {
-      const canvas = document.createElement('canvas');
-      canvas.width = this.$refs.video.videoWidth;
-      canvas.height = this.$refs.video.videoHeight;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(this.$refs.video, 0, 0, canvas.width, canvas.height);
-      this.imageSrc = canvas.toDataURL('image/png');
-      this.showModal = false;
-      this.croppa.refresh()
-      this.$vuetify.goTo('#croppaBox', {})
-    },
     async accept() { // Using async/await for moving from image upload to analysis, where image is passed via 'generateDataUrl'
       eventBus.$emit('appLoading')
       eventBus.$emit('toAnalysis')
@@ -262,7 +265,7 @@ export default {
   }
 }
 </script>
-
+  
 <style scope>
 p {
   line-height: 1.5;
@@ -290,29 +293,6 @@ a {
   border-radius: 0px;
 }
 
-/* #my-modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  /* bottom: 50%; */
-  /* transform: translate(-50%, -50%); */
-  /* height: 90%; */
-  /* margin-top: 5%;
- margin-bottom: 17%; */
-  /* max-width: 100%; */
-  /* height: 100%; */
-  /* height: 0%; */
- 
- #video-modal .modal-dialog {
- position: relative;
- top: 0;
- left: 0;
- margin: 0;
- width: 100%;
- height: 100%;
-}
-
-
 .croppa-container {
   width: 100%;
   height: 100%;
@@ -322,5 +302,24 @@ a {
   width: 100px;
   margin: auto;
   display: block;
+}
+
+
+#videoContainer {
+  width: 640px;
+  height: 480px;
+  border: 1px solid #000;
+  margin-top: 2%;
+  /* Centra el contenedor en la página */
+  overflow: hidden;
+  /* Oculta cualquier contenido que se salga del contenedor */
+}
+
+#liveVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin-bottom: 2%;
+  /* Asegura que el video cubra todo el espacio disponible sin distorsionarse */
 }
 </style>

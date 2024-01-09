@@ -11,8 +11,8 @@
     >
       <v-card-text>
         <v-layout align-center>
-        <v-avatar id="bot" tile size="24" class="mr-2">
-              <v-img src="/img/bot.gif"></v-img></v-avatar>
+        <v-avatar id="bot" tile size="30" class="mr-2">
+              <v-img src="/img/inconesp.png"></v-img></v-avatar>
         {{ $t('Analyzing Image...') }}
         </v-layout>
         <v-progress-linear

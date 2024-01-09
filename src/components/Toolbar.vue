@@ -5,7 +5,7 @@
 
   <v-toolbar-title class="text-uppercase white--text" style="cursor: pointer">
     <v-layout align-center  @click="rerender()">
-    <v-avatar tile size="20" class="mx-2"><img src="/img/bot.png" /></v-avatar>
+    <v-avatar tile size="35" class="mx-2"><img src="/img/inconesp.png" /></v-avatar>
     <span class="font-weight-black">VISION</span><span class="font-weight-thin">LYNX</span>
     </v-layout>
   </v-toolbar-title>

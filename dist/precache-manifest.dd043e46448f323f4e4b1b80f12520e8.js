@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "2ef608b7522591f6f355",
-    "url": "/mecvision/css/app.851ae1fd.css"
+    "revision": "0dd65f432b3017d9101b",
+    "url": "/mecvision/css/app.1753e786.css"
   },
   {
-    "revision": "2ef608b7522591f6f355",
-    "url": "/mecvision/js/app.9d4cacec.js"
+    "revision": "0dd65f432b3017d9101b",
+    "url": "/mecvision/js/app.91922a02.js"
   },
   {
     "revision": "650e277adef9e273d74c",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/mecvision/js/chunk-vendors.468db492.js"
   },
   {
-    "revision": "d322163c82c2f7eeb1fe57eee7c4f3c9",
+    "revision": "f45d00ebb64b3713fd6f4d45efd82cab",
     "url": "/mecvision/index.html"
   },
   {
@@ -32,12 +32,16 @@ self.__precacheManifest = [
     "url": "/mecvision/img/inconesp.png"
   },
   {
-    "revision": "2cb4594fe5207412a8d15d751cf0e578",
-    "url": "/mecvision/img/type-magnified-thumb.jpg"
-  },
-  {
     "revision": "391e4fb8f4a4ec32c32ca20a566219a9",
     "url": "/mecvision/img/legend.png"
+  },
+  {
+    "revision": "d80b2f00c580a26d17e79e2785e24a8d",
+    "url": "/mecvision/img/micro.jpg"
+  },
+  {
+    "revision": "2cb4594fe5207412a8d15d751cf0e578",
+    "url": "/mecvision/img/type-magnified-thumb.jpg"
   },
   {
     "revision": "8e73b36270e282252a67944140bd53b8",
@@ -48,12 +52,12 @@ self.__precacheManifest = [
     "url": "/mecvision/img/type-microscope-thumb.jpg"
   },
   {
-    "revision": "20f7377552ea1611d841d097a87993b8",
-    "url": "/mecvision/img/type-paper-thumb.jpg"
-  },
-  {
     "revision": "15664c7236991e795991aad4555b64ff",
     "url": "/mecvision/img/type-microscope.jpg"
+  },
+  {
+    "revision": "20f7377552ea1611d841d097a87993b8",
+    "url": "/mecvision/img/type-paper-thumb.jpg"
   },
   {
     "revision": "d3b374f148f42e909837a960a69a080a",
