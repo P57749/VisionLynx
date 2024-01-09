@@ -14,10 +14,10 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/mecvision/precache-manifest.dd043e46448f323f4e4b1b80f12520e8.js"
+  "/mecvision/precache-manifest.6a2db8c605e3820511f01f7e3c659594.js"
 );
 
-workbox.core.setCacheNameDetails({prefix: "mec-vision"});
+workbox.core.setCacheNameDetails({prefix: "VisionLynx"});
 
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
