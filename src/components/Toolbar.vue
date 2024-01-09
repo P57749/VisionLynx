@@ -5,7 +5,7 @@
 
   <v-toolbar-title class="text-uppercase white--text" style="cursor: pointer">
     <v-layout align-center  @click="rerender()">
-    <v-avatar tile size="20" class="mx-2"><img src="/mecvision/img/bot.png" /></v-avatar>
+    <v-avatar tile size="20" class="mx-2"><img src="/img/bot.png" /></v-avatar>
     <span class="font-weight-black">VISION</span><span class="font-weight-thin">LYNX</span>
     </v-layout>
   </v-toolbar-title>
@@ -36,10 +36,12 @@
         </v-list-tile>
       </v-list>
     </v-menu>
-
+    
+    
 </v-toolbar>
 
 </div>
+
 </template>
 
 <script>
@@ -67,9 +69,11 @@ export default {
         { title: 'en', name: 'English' },
         { title: 'es', name: 'Español' }
       ],
-      loading: false
+      loading: false,
+      
     }
   },
+  
   computed: {
     localeSelect () {
       if (this.$i18n.locale === 'en') {
@@ -93,7 +97,8 @@ export default {
     },
     changeLocale (locale) {
       i18n.locale = locale
-    }
+    },
+    
   }
 }
 </script>

@@ -27,6 +27,7 @@ import { eventBus } from './main.js'
 import AppToolbar from './components/Toolbar.vue'
 import LoadingDialogue from './components/Loading.vue'
 
+
 export default {
   name: 'MECVision',
   components: {

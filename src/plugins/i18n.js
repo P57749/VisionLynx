@@ -15,6 +15,7 @@ const messages = {
     'Magnified': 'Magnified',
     'Magnified-Description': 'Ovitrap paper is less narrow than a paper strip, on white pellon fabric with gray-black mosquito eggs that appear larger in the image.',
     'Microscope': 'Microscope',
+    'Camera-Description': 'fawk fbwfowiaf ;senf awoiefh awofn oawododp sdp odo',
     'Microscope-Description': 'Image is square, and mosquito eggs are clearly visible as large objects.',
     'Rotate': 'Rotate',
     'Remove': 'Remove',
