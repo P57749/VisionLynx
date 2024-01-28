@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/mecvision/precache-manifest.6a2db8c605e3820511f01f7e3c659594.js"
+  "/mecvision/precache-manifest.aca95dc0f0ab7a4953cf3970d6356777.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "VisionLynx"});
